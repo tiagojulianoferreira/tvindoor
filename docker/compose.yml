@@ -65,7 +65,6 @@ services:
       - LB_LOG_LEVEL=error
       - LB_LOG_SQL=false
       - TZ=America/Sao_Paulo
-
     secrets:
       - lb_install_pwd
       - lb_user_pwd
