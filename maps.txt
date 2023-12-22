@@ -1,0 +1,14 @@
+<span class="time-weather">
+            <a class="weather widget clickable" href="https://openweathermap.org/city/3445993">
+                <span class="weather-info">
+                    <span class="desc">Clouds</span>
+                    <span class="temp">29°C</span>
+                </span>
+                <i class="weather-icon wi wi-owm-day-802"></i>
+            </a>
+            <span class="time widget">16:24</span>
+        </span>
+
+
+
+.time-weather

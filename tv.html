@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Seu CSS existente aqui */
+
+        /* Novos estilos para o painel de horários */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #333131;
+            color: #FFFFFF;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden; /* Evita a barra de rolagem horizontal */
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            max-width: 100%;
+            margin: 20px;
+            background-color: #241f23;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidade */
+            box-sizing: border-box;
+            color: #FFFFFF;
+            overflow: hidden;
+        }
+
+        #schedule-panel {
+            width: 100%;
+            overflow-y: auto; /* Adicionado para rolar a tabela se necessário */
+            margin: 20px; /* Margem interna */
+        }
+
+        .schedule-heading {
+            font-size: 28px;
+            text-align: center;
+            margin: 20px 0;
+            color: #4CAF50;
+        }
+
+        .schedule-table {
+            width: 100%;
+            margin-top: 10px;
+            border-collapse: collapse;
+        }
+
+        .schedule-table th, .schedule-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #96A7C2;
+        }
+
+        .schedule-table th {
+            background-color: #447094;
+            color: #FFFFFF;
+        }
+
+        .schedule-table tr:nth-child(even) {
+            background-color: #2E3A4D;
+        }
+
+        .schedule-table tr:nth-child(odd) {
+            background-color: #394B5F;
+        }
+
+        /* Nova coluna para o slider de anúncios */
+        #ads-column {
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+            margin: 20px; /* Margem interna */
+        }
+
+        #ads-slider-container {
+            width: 100%;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Sombra para dar profundidade */
+        }
+
+        #ads-slider {
+            display: flex; /* Para alinhar os itens horizontalmente */
+            transition: transform 1s ease-in-out;
+        }
+
+        .ad {
+            flex: 0 0 100%; /* Define a largura de cada anúncio como 100% da largura do contêiner */
+        }
+
+        #ads-slider img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media only screen and (min-width: 768px) {
+            /* Ajustes para telas maiores, por exemplo, tablets e desktops */
+            .container {
+                flex-direction: row;
+            }
+
+            #schedule-panel {
+                width: 70%;
+                margin-right: 20px; /* Adicionado espaço entre a tabela e o slider */
+            }
+
+            #ads-column {
+                width: 30%;
+                max-width: 30%;
+                margin-top: 0; /* Removido o espaço entre a tabela e o slider */
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="schedule-panel">
+            <h2 class="schedule-heading">Horário das Disciplinas</h2>
+            <table class="schedule-table">
+                <thead>
+                    <tr>
+                        <th>Horário</th>
+                        <th>Nome da Disciplina</th>
+                        <th>Professor</th>
+                        <th>Sala</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Exemplos adicionados -->
+                    <tr>
+                        <td>8:00 - 9:30</td>
+                        <td>Matemática</td>
+                        <td>Prof. Silva</td>
+                        <td>Sala 101</td>
+                    </tr>
+                    <!-- Adicione mais linhas conforme necessário -->
+                    <tr>
+                        <td>10:00 - 11:30</td>
+                        <td>Química</td>
+                        <td>Prof. Oliveira</td>
+                        <td>Sala 202</td>
+                    </tr>
+                    <tr>
+                        <td>13:00 - 14:30</td>
+                        <td>Língua Portuguesa</td>
+                        <td>Prof. Costa</td>
+                        <td>Sala 303</td>
+                    </tr>
+                    <!-- Adicione mais linhas conforme necessário -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Nova coluna com slider de anúncios -->
+        <div id="ads-column">
+            <h2 class="schedule-heading">Anúncios</h2>
+            <div id="ads-slider-container">
+                <div id="ads-slider">
+                    <!-- Substitua os URLs das imagens pelos seus próprios anúncios -->
+                    <div class="ad"><img src="ad1.jpg" alt="Anúncio 1"></div>
+                    <div class="ad"><img src="ad2.jpg" alt="Anúncio 2"></div>
+                    <div class="ad"><img src="ad3.jpg" alt="Anúncio 3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Adiciona a funcionalidade de slider automático
+        const slider = document.getElementById('ads-slider');
+        let currentIndex = 0;
+
+        function showNextSlide() {
+            currentIndex = (currentIndex + 1) % slider.children.length;
+            const translateValue = -currentIndex * 100;
+            slider.style.transform = `translateX(${translateValue}%)`;
+        }
+
+        setInterval(showNextSlide, 10000); // Altera o slide a cada 3 segundos
+    </script>
+
+    <!-- Seu HTML existente aqui -->
+</body>
+</html>
