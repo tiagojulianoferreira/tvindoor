@@ -106,7 +106,7 @@ def get_owm_data():
 @app.route('/api/scrapy')
 def get_reservations():
     # URL da página de login
-    login_url = "https://labtv.tubarao.ifsc.edu.br/Web/"
+    login_url = os.getenv("BOOKED_LOGIN_URL")
 
     # Dados de login obtidos do arquivo .env
     email = os.getenv("EMAIL")
@@ -122,7 +122,7 @@ def get_reservations():
     }
 
     # URL do dashboard após o login
-    dashboard_url = "https://labtv.tubarao.ifsc.edu.br/Web/dashboard.php"
+    dashboard_url = os.getenv('BOOKED_DASHBOARD_URL')
 
     # Configurações para usar o navegador Chrome
     chrome_options = webdriver.ChromeOptions()
