@@ -39,11 +39,12 @@ def static_files(filename):
 
 @app.route('/api/data')
 def get_data():
-    return jsonify(reservas)
+    with app.app_context():
+        return jsonify(reservas)
 
 @app.route('/api/owm')
 def get_owm_data():
-    # with app.app_context():
+    with app.app_context():
         # Obter dados de temperatura, horário e previsão do tempo para a cidade desejada (por exemplo, "London")
         weather_data = api_wrapper.get_weather_data(os.getenv("OWM_CITY"))
 
