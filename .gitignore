@@ -1,5 +1,4 @@
 backend/.venv/
 .env
 docker/
-reservas.json
 .venv
