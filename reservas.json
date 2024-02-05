@@ -1,8 +1,14 @@
 [
   {
-    "Horário": "16:00 - 16:30",
-    "Local": "B03 - Auditório",
-    "Responsável": "Juan Carlos Nascimento",
-    "Título": "TESTE DE RESERVA"
+    "Horário": "18:00 - 18:30",
+    "Local": "B08 - Laboratório de Redes de Computadores (06)",
+    "Responsável": "Tiago Juliano Ferreira",
+    "Título": "TESTE 22 CTIC - IGNORAR"
+  },
+  {
+    "Horário": "18:30 - 19:00",
+    "Local": "B08 - Laboratório de Redes de Computadores (06)",
+    "Responsável": "Tiago Juliano Ferreira",
+    "Título": "TESTE 23 CTIC - IGNORAR"
   }
 ]

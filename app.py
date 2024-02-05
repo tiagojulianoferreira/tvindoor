@@ -43,7 +43,7 @@ def get_data():
 
 @app.route('/api/owm')
 def get_owm_data():
-    with app.app_context():
+    # with app.app_context():
         # Obter dados de temperatura, horário e previsão do tempo para a cidade desejada (por exemplo, "London")
         weather_data = api_wrapper.get_weather_data(os.getenv("OWM_CITY"))
 
@@ -57,7 +57,7 @@ def get_owm_data():
                     'scattered clouds': {'translation': 'nuvens dispersas', 'icon': 'url_do_icone_nuvens_dispersas'},
                     'rain': {'translation': 'chuva', 'icon': 'wi-day-rain'},
                     'thunderstorm': {'translation': 'tempestade', 'icon': 'wi-day-thunderstorm'},
-                    
+                    'overcast clouds': {'translation': 'nublado', 'icon': 'wi-day-sunny-overcast'}
                 }
                 
         translated_forecast = translation_dict.get(weather_description.lower(), weather_description)
@@ -169,10 +169,10 @@ def get_reservations():
             driver.quit()
             
 # Agendar a função get_reservations para ser executada a cada 1 minuto
-schedule.every(1).minutes.do(get_reservations)
+schedule.every(5).minutes.do(get_reservations)
 
 # Agendar a função get_owm_data para ser executada a cada 1 minuto
-schedule.every(5).minutes.do(get_owm_data)
+# schedule.every(1).minutes.do(get_owm_data)
 
 def run_schedule():
     while True:
