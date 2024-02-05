@@ -62,12 +62,12 @@
             <span class="time-weather">
                 <a class="weather widget">
                     <span class="weather-info">
-                        <span class="temp" id="temperature">29°C</span>
+                        <span class="temp" id="temperature"></span>
                     </span>
                     <i class="weather-icon" id="weather-icon"></i>
                 </a>
             </span>
-            <span class="time" id="current-time"></span> <!-- Adicione a hora certa aqui -->
+            <span class="time" id="current-time"></span> 
         </div>
     <script>
         // Adiciona a funcionalidade de slider automático
@@ -84,7 +84,7 @@
         // Função para obter dados de temperatura e hora do backend
         function getWeatherAndTime() {
             // Substitua a URL abaixo pela URL do seu backend que fornece os dados
-            const backendURL = "http://127.0.0.1:5053/api/owm";
+            const backendURL = "http://172.16.110.40:5053/api/owm";
     
         // Faça uma requisição para obter os dados do backend
         fetch(backendURL)
