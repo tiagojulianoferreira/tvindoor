@@ -3,3 +3,5 @@ flask
 selenium
 beautifulsoup4
 apscheduler
+wheel
+gunicorn
