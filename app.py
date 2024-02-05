@@ -109,7 +109,6 @@ def get_reservations():
         chrome_options.add_argument("--verbose")
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-gpu")
-
         driver = webdriver.Chrome(options=chrome_options)
         driver.get(login_url)
 
