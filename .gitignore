@@ -2,3 +2,4 @@ backend/.venv/
 .env
 docker/
 .venv
+backend/__pycache__/
