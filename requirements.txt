@@ -2,4 +2,4 @@ python-dotenv
 flask
 selenium
 beautifulsoup4
-schedule
+apscheduler
