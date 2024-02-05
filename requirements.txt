@@ -1,7 +1,9 @@
 python-dotenv
 flask
+flask_cors
 selenium
 beautifulsoup4
 apscheduler
 wheel
 gunicorn
+schedule
