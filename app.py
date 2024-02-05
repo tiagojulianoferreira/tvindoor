@@ -79,7 +79,6 @@ def get_owm_data():
         'time': horario_atual,
         'forecast': forecast,
     }
-    print(data['time'])
     return jsonify(data)
 # @app.route('/api/scrapy')
 def get_reservations():
