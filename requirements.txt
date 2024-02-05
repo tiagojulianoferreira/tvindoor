@@ -7,3 +7,4 @@ apscheduler
 wheel
 gunicorn
 schedule
+requests
