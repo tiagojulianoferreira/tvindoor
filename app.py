@@ -79,6 +79,7 @@ def get_owm_data():
         'time': horario_atual,
         'forecast': forecast,
     }
+    print(data['time'])
     return jsonify(data)
 # @app.route('/api/scrapy')
 def get_reservations():
@@ -103,9 +104,12 @@ def get_reservations():
 
         # Configurações para usar o navegador Chrome
         chrome_options = webdriver.ChromeOptions()
-        # chrome_options.add_argument('--headless')  # Execute em segundo plano, remova se desejar visualização
         chrome_options.add_argument('--ignore-certificate-errors')
         chrome_options.add_argument('--headless')
+        chrome_options.binary_location = '/usr/bin/google-chrome'
+        chrome_options.add_argument("--verbose")
+        chrome_options.add_argument("--no-sandbox")
+        chrome_options.add_argument("--disable-gpu")
 
         driver = webdriver.Chrome(options=chrome_options)
         driver.get(login_url)
@@ -166,6 +170,9 @@ def get_reservations():
         
 # Agendar a função get_reservations para ser executada a cada 1 minuto
 schedule.every(1).minutes.do(get_reservations)
+
+# Agendar a função get_reservations para ser executada a cada 1 minuto
+schedule.every(1).minutes.do(get_owm_data)
 
 def run_schedule():
     while True:

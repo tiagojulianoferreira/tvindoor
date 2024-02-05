@@ -1,31 +1,19 @@
 [
   {
-    "Horário": "10:00 - 10:30",
-    "Título": "TESTE 15 CTIC - IGNORAR",
+    "Horário": "14:30 - 15:00",
+    "Título": "TESTE 21 CTIC - IGNORAR",
     "Local": "B08 - Laboratório de Redes de Computadores (06)",
     "Responsável": "Tiago Juliano Ferreira"
   },
   {
-    "Horário": "10:30 - 11:00",
-    "Título": "TESTE 16 CTIC - IGNORAR",
-    "Local": "B08 - Laboratório de Redes de Computadores (06)",
-    "Responsável": "Tiago Juliano Ferreira"
+    "Horário": "14:30 - 15:30",
+    "Título": "TESTE DE RESERVA 2024",
+    "Local": "B03 - Auditório",
+    "Responsável": "Juan Carlos Nascimento"
   },
   {
-    "Horário": "11:00 - 11:30",
-    "Título": "TESTE 17 CTIC - IGNORAR",
-    "Local": "B08 - Laboratório de Redes de Computadores (06)",
-    "Responsável": "Tiago Juliano Ferreira"
-  },
-  {
-    "Horário": "11:30 - 12:00",
-    "Título": "TESTE 18 CTIC - IGNORAR",
-    "Local": "B08 - Laboratório de Redes de Computadores (06)",
-    "Responsável": "Tiago Juliano Ferreira"
-  },
-  {
-    "Horário": "12:00 - 12:30",
-    "Título": "TESTE 19 CTIC - IGNORAR",
+    "Horário": "15:00 - 15:30",
+    "Título": "TESTE 22 CTIC - IGNORAR",
     "Local": "B08 - Laboratório de Redes de Computadores (06)",
     "Responsável": "Tiago Juliano Ferreira"
   }

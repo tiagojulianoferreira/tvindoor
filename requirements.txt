@@ -2,6 +2,7 @@ python-dotenv
 flask
 flask_cors
 selenium
+webdriver-manager
 beautifulsoup4
 apscheduler
 wheel
