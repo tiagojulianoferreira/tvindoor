@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css">
+    <link rel="stylesheet" href="../static/css/weather-icons.min.css">
     <link rel="stylesheet" href="../static/styles.css">
 </head>
 
@@ -69,7 +69,7 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="static/jquery-3.6.0.min.js"></script>
     <script>
         function updateSchedule() {
             $.getJSON('https://tv.tubarao.ifsc.edu.br/api/data', function(data) {
@@ -118,6 +118,17 @@
 
         // Atualize os dados a cada 5 minutos (ou conforme necessário)
         setInterval(getWeatherAndTime, 30000);  // 300000 milissegundos = 5 minutos
+        // Adiciona a funcionalidade de slider automático
+        const slider = document.getElementById('ads-slider');
+        let currentIndex = 0;
+
+        function showNextSlide() {
+            currentIndex = (currentIndex + 1) % slider.children.length;
+            const translateValue = -currentIndex * 100;
+            slider.style.transform = `translateY(${translateValue}%)`;
+        }
+
+        setInterval(showNextSlide, 9000); // Altera o slide a cada 3 segundos
     </script>
 </body>
 </html>

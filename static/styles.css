@@ -61,7 +61,6 @@ body {
 .schedule-table tr:nth-child(odd) {
     background-color: #FFFFFF;
 }
-
 #ads-column {
     flex: 1;
     overflow: hidden;
