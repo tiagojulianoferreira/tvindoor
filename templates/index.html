@@ -104,7 +104,7 @@
             fetch(backendURL)
                 .then(response => response.json())
                 .then(data => {
-                    console.log("Dados recebidos do backend:", data); // Adiciona um log para verificar os dados recebidos
+                    // console.log("Dados recebidos do backend:", data); // Adiciona um log para verificar os dados recebidos
                     // Atualize os elementos HTML com os dados obtidos
                     document.getElementById('temperature').innerText = `${data.temperature}º`;
                     document.getElementById('weather-icon').className = `weather-icon wi ${data.forecast.icon}`;
