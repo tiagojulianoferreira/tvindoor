@@ -3,4 +3,4 @@ backend/.venv/
 docker/
 .venv
 backend/__pycache__/
-reservas.json
+# reservas.json
