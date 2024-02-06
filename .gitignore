@@ -4,3 +4,6 @@ docker/
 .venv
 backend/__pycache__/
 # reservas.json
+tv.html
+styles.css
+qr-code.png
