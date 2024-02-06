@@ -55,7 +55,7 @@ def get_owm_data():
         translation_dict = {
                     'clear sky': {'translation': 'céu limpo', 'icon': 'wi-day-sunny'},
                     'few clouds': {'translation': 'poucas nuvens', 'icon': 'wi-day-sunny-overcast'},
-                    'scattered clouds': {'translation': 'nuvens dispersas', 'icon': 'url_do_icone_nuvens_dispersas'},
+                    'scattered clouds': {'translation': 'nuvens dispersas', 'icon': 'wi-day-sunny-overcast'},
                     'rain': {'translation': 'chuva', 'icon': 'wi-day-rain'},
                     'thunderstorm': {'translation': 'tempestade', 'icon': 'wi-day-thunderstorm'},
                     'overcast clouds': {'translation': 'nublado', 'icon': 'wi-day-sunny-overcast'}
