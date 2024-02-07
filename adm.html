@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração de Avisos</title>
+    <link rel="stylesheet" href="../static/css/weather-icons.min.css">
+    <link rel="stylesheet" href="../static/styles.css">
+    <style>
+        /* Adiciona estilos específicos para o formulário */
+        #notice-form {
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        input[type="url"],
+        input[type="file"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+        }
+        button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #447094;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover {
+            background-color: #32516e;
+        }
+        .checkbox-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .checkbox-group input[type="checkbox"] {
+            margin-right: 5px;
+        }
+        /* Oculta o campo Empresa e Requisitos por padrão */
+        #company-field,
+        #requirements-field {
+            display: none;
+        }
+
+        /* Estilos para o slider */
+        .ad {
+            position: relative;
+        }
+
+        .ad img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .ad .ad-title,
+        .ad .ad-description,
+        .ad .ad-requirements {
+            position: absolute;
+            top: 50px; /* Ajusta a posição do título */
+            left: 100px;
+            right: 100px;
+            color: #080522;
+            font-size: 30px;
+            text-align: center;
+            opacity: 0.8;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin: 0 auto; /* Centraliza horizontalmente */
+            width: 80%; /* Define a largura */
+        }
+
+        .ad .ad-description {
+            top: 150px; /* Ajusta a posição da descrição */
+            font-size: 20px;
+        }
+
+        .ad .ad-requirements {
+            top: 200px; /* Ajusta a posição dos requisitos */
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="schedule-panel">
+            <h2 class="schedule-heading">CADASTRO DE AVISOS</h2>
+            <div id="notice-form">
+                <div class="form-group checkbox-group">
+                    <label>Selecione o tipo do aviso:</label>
+                    <label><input type="checkbox" name="notice-type" value="vagas"> Vagas</label>
+                    <label><input type="checkbox" name="notice-type" value="bolsas"> Bolsas</label>
+                    <label><input type="checkbox" name="notice-type" value="editais"> Editais</label>
+                </div>
+                <div class="form-group" id="company-field">
+                    <label for="company">Empresa:</label>
+                    <input type="text" id="company" name="company">
+                </div>
+                <div class="form-group" id="requirements-field">
+                    <label for="requirements">Requisitos:</label>
+                    <textarea id="requirements" name="requirements" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="notice-title">Título:</label>
+                    <input type="text" id="notice-title" name="notice-title" required>
+                </div>
+                <div class="form-group">
+                    <label for="notice-description">Descrição:</label>
+                    <textarea id="notice-description" name="notice-description" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="notice-photo">Foto:</label>
+                    <input type="file" id="notice-photo" name="notice-photo" accept="image/*">
+                </div>
+                <div class="form-group">
+                    <label for="notice-link">Link:</label>
+                    <input type="url" id="notice-link" name="notice-link">
+                </div>
+                <button type="submit">Enviar</button>
+            </div>
+        </div>
+
+        <!-- Nova coluna com slider de anúncios -->
+        <div id="ads-column">
+            <h2 class="schedule-heading">NOTÍCIAS</h2>
+            <div id="ads-slider-container">
+                <div id="ads-slider">
+                    <!-- Substitua os URLs das imagens pelos seus próprios anúncios -->
+                    <div class="ad" id="ad1">
+                        <img src="static/images/test/ad1.png" alt="Anúncio 1">
+                        <div class="ad-title"></div>
+                        <div class="ad-description"></div>
+                        <div class="ad-requirements"></div>
+                    </div>
+                    <div class="ad" id="ad2"><img src="static/images/test/ad2.png" alt="Anúncio 2"></div>
+                    <div class="ad" id="ad3"><img src="static/images/test/ad3.png" alt="Anúncio 3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <div id="footer">
+        <!-- Logotipo -->
+        <img src="static/images/seu-logotipo.png" alt="Logotipo">
+
+        <!-- Texto do rodapé -->
+        <p>Desenvolvido pela CTIC Campus Tubarão</p>
+
+        <!-- Previsão do Tempo e Hora Certa -->
+        <div id="weather-container">
+            <span class="time-weather">
+                <a class="weather widget">
+                    <span class="weather-info">
+                        <span class="temp" id="temperature"></span>
+                    </span>
+                    <i class="weather-icon" id="weather-icon"></i>
+                </a>
+            </span>
+            <span class="time" id="current-time"></span> 
+        </div>
+    </div>
+
+    <script src="static/jquery-3.6.0.min.js"></script>
+    <script>
+        const noticeTitleInput = document.getElementById('notice-title');
+        const noticeDescriptionInput = document.getElementById('notice-description');
+        const noticeRequirementsInput = document.getElementById('requirements');
+
+        // Atualiza dinamicamente o conteúdo do slide lateral com base nos campos do formulário
+        noticeTitleInput.addEventListener('input', updateAdContent);
+        noticeDescriptionInput.addEventListener('input', updateAdContent);
+        noticeRequirementsInput.addEventListener('input', updateAdContent);
+
+        function updateAdContent() {
+            const adTitleElements = document.querySelectorAll('.ad-title');
+            const adDescriptionElements = document.querySelectorAll('.ad-description');
+            const adRequirementsElements = document.querySelectorAll('.ad-requirements');
+
+            adTitleElements.forEach(adTitle => {
+                adTitle.textContent = noticeTitleInput.value;
+            });
+
+            adDescriptionElements.forEach(adDescription => {
+                adDescription.textContent = noticeDescriptionInput.value;
+            });
+
+            adRequirementsElements.forEach(adRequirements => {
+                adRequirements.textContent = noticeRequirementsInput.value;
+            });
+        }
+    </script>
+</body>
+</html>
