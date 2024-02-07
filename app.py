@@ -58,9 +58,9 @@ def get_owm_data():
                     'scattered clouds': {'translation': 'nuvens dispersas', 'icon': 'wi-day-sunny-overcast'},
                     'rain': {'translation': 'chuva', 'icon': 'wi-day-rain'},
                     'thunderstorm': {'translation': 'tempestade', 'icon': 'wi-day-thunderstorm'},
-                    'overcast clouds': {'translation': 'nublado', 'icon': 'wi-day-sunny-overcast'}
+                    'overcast clouds': {'translation': 'nublado', 'icon': 'wi-day-sunny-overcast'},
+                    'broken clouds': {'translation': 'nublado', 'icon': 'wi-cloudy'}
                 }
-                
         translated_forecast = translation_dict.get(weather_description.lower(), weather_description)
 
         # Obter o horário da última atualização e formatar para o padrão brasileiro
