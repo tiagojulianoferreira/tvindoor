@@ -1,20 +1,14 @@
 [
   {
-    "Horário": "14:00 - 16:00",
-    "Local": "A05 - Sala de Aula I",
-    "Responsável": "Tiago Quartiero Pereira",
-    "Título": "REUNIÃO"
-  },
-  {
-    "Horário": "15:00 - 16:00",
+    "Horário": "16:00 - 17:00",
     "Local": "A08 - Sala de Aula II",
-    "Responsável": "Fernando Silvano Goncalves",
-    "Título": "Reunião Eixo de Informação e Comunicação"
+    "Responsável": "Ctic Tubarão",
+    "Título": "TEC-ADM - 1° - Responsabilidade Social e Sustentabilidade TESTE"
   },
   {
-    "Horário": "15:00 - 16:00",
-    "Local": "B03 - Auditório",
-    "Responsável": "Gustavo Camargo Berti",
-    "Título": "Reunião Eixo Desenvolvimento Educacional e Social"
+    "Horário": "16:30 - 17:00",
+    "Local": "B08 - Laboratório de Redes de Computadores (06)",
+    "Responsável": "Tiago Juliano Ferreira",
+    "Título": "TESTE CTIC IGNORAR"
   }
 ]

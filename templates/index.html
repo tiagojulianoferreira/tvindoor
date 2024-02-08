@@ -35,13 +35,13 @@
 
         <!-- Nova coluna com slider de anúncios -->
         <div id="ads-column">
-            <h2 class="schedule-heading">AVISOS</h2>
+            <!-- <h2 class="schedule-heading">AVISOS</h2> -->
             <div id="ads-slider-container">
                 <div id="ads-slider">
                     <!-- Substitua os URLs das imagens pelos seus próprios anúncios -->
-                    <div class="ad"><img src="../static/images/ad1.jpg" alt="Anúncio 1"></div>
-                    <div class="ad"><img src="../static/images/ad2.jpg" alt="Anúncio 2"></div>
-                    <div class="ad"><img src="../static/images/ad3.jpg" alt="Anúncio 3"></div>
+                    <div class="ad"><img src="../static/images/ad1.png" alt="Anúncio 1"></div>
+                    <div class="ad"><img src="../static/images/ad2.png" alt="Anúncio 2"></div>
+                    <div class="ad"><img src="../static/images/ad3.png" alt="Anúncio 3"></div>
                 </div>
             </div>
         </div>
@@ -72,7 +72,7 @@
     <script src="static/jquery-3.6.0.min.js"></script>
     <script>
         function updateSchedule() {
-            $.getJSON('https://tv.tubarao.ifsc.edu.br/api/data', function(data) {
+            $.getJSON('https://devtv.tubarao.ifsc.edu.br/api/data', function(data) {
                 // Limpa o conteúdo da tabela
                 $('#schedule-body').empty();
 

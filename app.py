@@ -172,6 +172,9 @@ def get_reservations():
 # Agendar a função get_reservations para ser executada a cada 1 minuto
 schedule.every(5).minutes.do(get_reservations)
 
+# Agendar a função get_data para ser executada a cada 1 minuto
+schedule.every(5).minutes.do(get_data)
+
 # Agendar a função get_owm_data para ser executada a cada 1 minuto
 # schedule.every(1).minutes.do(get_owm_data)
 
