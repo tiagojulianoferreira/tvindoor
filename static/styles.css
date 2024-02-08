@@ -155,3 +155,46 @@ body {
     font-size: 3.4em;
     margin-left: 10px;
 }
+
+/* Adicione estilos específicos para telas menores */
+
+/* Quando a largura da tela for menor que 768px */
+@media only screen and (max-width: 768px) {
+    .container {
+        flex-direction: column; /* Altera a direção do contêiner para coluna */
+        align-items: center; /* Centraliza os itens horizontalmente */
+    }
+
+    #schedule-panel {
+        width: 100%; /* Define a largura do painel de horários para 100% */
+        margin-bottom: 20px; /* Adiciona margem inferior para separação */
+    }
+
+    .schedule-heading {
+        font-size: 24px; /* Reduz o tamanho do cabeçalho */
+    }
+
+    .schedule-table {
+        font-size: 14px; /* Reduz o tamanho da fonte da tabela */
+    }
+
+    #ads-column {
+        width: 100%; /* Define a largura da coluna de anúncios para 100% */
+    }
+
+    #ads-slider-container {
+        width: 100%; /* Define a largura do contêiner de slider para 100% */
+    }
+
+    #ads-slider {
+        flex-direction: row; /* Altera a direção do slider para linha */
+        overflow-x: auto; /* Adiciona rolagem horizontal ao slider */
+        height: auto; /* Define a altura do slider como automática */
+    }
+
+    .ad {
+        flex: none; /* Impede que os anúncios sejam redimensionados */
+        width: auto; /* Define a largura dos anúncios como automática */
+        margin-right: 10px; /* Adiciona margem à direita para separação entre anúncios */
+    }
+}

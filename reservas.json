@@ -1,14 +1,20 @@
 [
   {
-    "Horário": "16:00 - 17:00",
-    "Local": "A08 - Sala de Aula II",
-    "Responsável": "Ctic Tubarão",
-    "Título": "TEC-ADM - 1° - Responsabilidade Social e Sustentabilidade TESTE"
+    "Horário": "19:30 - 20:00",
+    "Local": "A04 - Lab. Práticas Pedagógicas e Atendimento",
+    "Responsável": "Juan Carlos Nascimento",
+    "Título": "CST-ADS(NOVO) - 1ª - Organização e Arquitetura de Computadores - TESTE"
   },
   {
-    "Horário": "16:30 - 17:00",
+    "Horário": "19:30 - 20:00",
     "Local": "B08 - Laboratório de Redes de Computadores (06)",
     "Responsável": "Tiago Juliano Ferreira",
-    "Título": "TESTE CTIC IGNORAR"
+    "Título": "TESTANDO"
+  },
+  {
+    "Horário": "20:00 - 20:30",
+    "Local": "B08 - Laboratório de Redes de Computadores (06)",
+    "Responsável": "Tiago Juliano Ferreira",
+    "Título": "TESTANDO 2"
   }
 ]

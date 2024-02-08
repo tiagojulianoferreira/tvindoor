@@ -1,4 +1,7 @@
-import os, datetime, time, threading
+import os
+import datetime
+import time
+import threading
 from flask import Flask, render_template, jsonify, send_from_directory, json
 from pytz import timezone
 from flask_cors import CORS
@@ -21,6 +24,37 @@ owm_api_key = os.getenv("OWM_KEY")
 
 # Criando uma instância da classe APIWrapper
 api_wrapper = APIWrapper(owm_api_key)
+
+# Definir um lock para sincronização entre get_reservations e get_data
+reservation_lock = threading.Lock()
+
+# Variável para armazenar o driver
+driver = None
+
+# Função para inicializar o driver
+def initialize_driver():
+    global driver
+    # Configurações para usar o navegador Chrome
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument('--ignore-certificate-errors')
+    chrome_options.add_argument('--headless')
+    chrome_options.binary_location = '/usr/bin/google-chrome'
+    chrome_options.add_argument("--verbose")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-gpu")
+    driver = webdriver.Chrome(options=chrome_options)
+
+# Função para verificar se o driver está em execução e reiniciá-lo se necessário
+def check_driver():
+    global driver
+    if driver is None or not driver.service.is_connectable():
+        print("Reiniciando o chromedriver...")
+        if driver:
+            driver.quit()
+        initialize_driver()
+
+# Inicializar o driver
+initialize_driver()
 
 # Carregar os dados do arquivo JSON
 with open('reservas.json', 'r', encoding='utf-8') as f:
@@ -82,8 +116,12 @@ def get_owm_data():
             'forecast': forecast,
         }
         return jsonify(data)
-# @app.route('/api/scrapy')
+
 def get_reservations():
+    global reservas
+    # Adquira o bloqueio antes de acessar reservas
+    reservation_lock.acquire()
+    try:
         with app.app_context():
             # URL da página de login
             login_url = os.getenv("BOOKED_LOGIN_URL")
@@ -104,15 +142,10 @@ def get_reservations():
             # URL do dashboard após o login
             dashboard_url = os.getenv('BOOKED_DASHBOARD_URL')
 
-            # Configurações para usar o navegador Chrome
-            chrome_options = webdriver.ChromeOptions()
-            chrome_options.add_argument('--ignore-certificate-errors')
-            chrome_options.add_argument('--headless')
-            chrome_options.binary_location = '/usr/bin/google-chrome'
-            chrome_options.add_argument("--verbose")
-            chrome_options.add_argument("--no-sandbox")
-            chrome_options.add_argument("--disable-gpu")
-            driver = webdriver.Chrome(options=chrome_options)
+            # Verificar se o driver está em execução e reiniciá-lo se necessário
+            check_driver()
+
+            # Navegar até a página de login
             driver.get(login_url)
 
             # Preencher o formulário de login
@@ -157,6 +190,9 @@ def get_reservations():
                     # Adiciona o dicionário à lista de resultados
                     results.append(reservation_info)
 
+                # Atualizar a variável reservas após a obtenção das novas reservas
+                reservas = results
+
                 # Salvar os resultados em um arquivo JSON
                 with open('reservas.json', 'w', encoding='utf-8') as json_file:
                     json.dump(results, json_file, ensure_ascii=False, indent=2)
@@ -166,28 +202,27 @@ def get_reservations():
             else:
                 print("O login falhou. Verifique as credenciais ou a lógica de redirecionamento.")
 
-            # Fechar o navegador após a conclusão
-            driver.quit()
-            
-# Agendar a função get_reservations para ser executada a cada 1 minuto
+    finally:
+        # Libere o bloqueio após a conclusão
+        reservation_lock.release()
+
+# Agendar a função get_reservations para ser executada a cada 5 minutos
 schedule.every(5).minutes.do(get_reservations)
 
-# Agendar a função get_data para ser executada a cada 1 minuto
+# Agendar a função get_data para ser executada a cada 5 minutos
 schedule.every(5).minutes.do(get_data)
-
-# Agendar a função get_owm_data para ser executada a cada 1 minuto
-# schedule.every(1).minutes.do(get_owm_data)
 
 def run_schedule():
     while True:
         with app.app_context():
             schedule.run_pending()
             time.sleep(1)
+
 # Iniciar uma thread para executar o agendador de tarefas
 schedule_thread = threading.Thread(target=run_schedule)
 schedule_thread.daemon = True
 schedule_thread.start()
 
 if __name__ == '__main__':
-    # get_reservations()
-    app.run(debug=True, host='0.0.0.0', port=5053)
+    # Executar o aplicativo Flask com o autoreload ativado
+    app.run(debug=True, host='0.0.0.0', port=5053, use_reloader=True)
