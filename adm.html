@@ -21,13 +21,13 @@
         }
         input[type="text"],
         input[type="url"],
-        input[type="file"],
         textarea {
-            width: 100%;
+            width: calc(100% - 22px); /* Ajusta o tamanho dos inputs para levar em conta o padding */
             padding: 10px;
             border-radius: 5px;
             border: 1px solid #ccc;
             box-sizing: border-box;
+            margin-top: 5px; /* Ajusta a margem superior dos inputs */
         }
         textarea {
             resize: vertical;
@@ -51,15 +51,47 @@
         .checkbox-group input[type="checkbox"] {
             margin-right: 5px;
         }
-        /* Oculta o campo Empresa e Requisitos por padrão */
+        /* Exibe o campo Empresa e Requisitos por padrão */
         #company-field,
         #requirements-field {
-            display: none;
+            display: block;
+            margin-top: 10px; /* Ajusta a margem superior dos campos */
+        }
+        /* Estilo para a descrição */
+        #notice-description {
+            margin-right: 50px; /* Margem direita de pelo menos 50px */
+        }
+        /* Estilos para os requisitos */
+        #requirements {
+            width: calc(100% - 22px); /* Ajusta o tamanho do campo para levar em conta o padding */
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            margin-top: 5px; /* Ajusta a margem superior */
+            
+            margin-bottom: 20px; /* Margem inferior para separação */
         }
 
         /* Estilos para o slider */
-        .ad {
+        #ads-column {
+            padding: 20px;
+        }
+
+        #ads-slider-container {
             position: relative;
+            overflow: hidden;
+        }
+
+        #ads-slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .ad {
+            width: 100%;
+            flex: 0 0 auto;
+            margin-right: 20px; /* Espaçamento entre os slides */
         }
 
         .ad img {
@@ -70,27 +102,35 @@
 
         .ad .ad-title,
         .ad .ad-description,
-        .ad .ad-requirements {
+        .ad .ad-requirements,
+        .ad .ad-workload {
             position: absolute;
-            top: 50px; /* Ajusta a posição do título */
-            left: 100px;
-            right: 100px;
+            top: 40px; /* Ajusta a posição do título */
+            left: 62px;
+            max-width: 80%;
+            right: 20px;
             color: #080522;
             font-size: 30px;
             text-align: center;
             opacity: 0.8;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             margin: 0 auto; /* Centraliza horizontalmente */
-            width: 80%; /* Define a largura */
+            width: calc(100% - 40px); /* Define a largura */
+            padding: 20px;
         }
 
         .ad .ad-description {
-            top: 150px; /* Ajusta a posição da descrição */
+            top: 100px; /* Ajusta a posição da descrição */
             font-size: 20px;
         }
 
         .ad .ad-requirements {
-            top: 200px; /* Ajusta a posição dos requisitos */
+            top: 240px; /* Ajusta a posição dos requisitos */
+            font-size: 16px;
+        }
+
+        .ad .ad-workload {
+            top: 30px; /* Ajusta a posição da carga horária */
             font-size: 16px;
         }
     </style>
@@ -103,17 +143,13 @@
             <div id="notice-form">
                 <div class="form-group checkbox-group">
                     <label>Selecione o tipo do aviso:</label>
-                    <label><input type="checkbox" name="notice-type" value="vagas"> Vagas</label>
+                    <label><input type="checkbox" name="notice-type" value="vagas" checked> Vagas</label>
                     <label><input type="checkbox" name="notice-type" value="bolsas"> Bolsas</label>
                     <label><input type="checkbox" name="notice-type" value="editais"> Editais</label>
                 </div>
                 <div class="form-group" id="company-field">
-                    <label for="company">Empresa:</label>
+                    <label for="company">Instituição:</label>
                     <input type="text" id="company" name="company">
-                </div>
-                <div class="form-group" id="requirements-field">
-                    <label for="requirements">Requisitos:</label>
-                    <textarea id="requirements" name="requirements" rows="4"></textarea>
                 </div>
                 <div class="form-group">
                     <label for="notice-title">Título:</label>
@@ -123,9 +159,13 @@
                     <label for="notice-description">Descrição:</label>
                     <textarea id="notice-description" name="notice-description" rows="4" required></textarea>
                 </div>
+                <div class="form-group" id="requirements-field">
+                    <label for="requirements">Requisitos:</label>
+                    <textarea id="requirements" name="requirements" rows="4"></textarea>
+                </div>
                 <div class="form-group">
-                    <label for="notice-photo">Foto:</label>
-                    <input type="file" id="notice-photo" name="notice-photo" accept="image/*">
+                    <label for="notice-workload">Carga Horária:</label>
+                    <input type="text" id="notice-workload" name="notice-workload">
                 </div>
                 <div class="form-group">
                     <label for="notice-link">Link:</label>
@@ -137,7 +177,6 @@
 
         <!-- Nova coluna com slider de anúncios -->
         <div id="ads-column">
-            <h2 class="schedule-heading">NOTÍCIAS</h2>
             <div id="ads-slider-container">
                 <div id="ads-slider">
                     <!-- Substitua os URLs das imagens pelos seus próprios anúncios -->
@@ -146,6 +185,7 @@
                         <div class="ad-title"></div>
                         <div class="ad-description"></div>
                         <div class="ad-requirements"></div>
+                        <div class="ad-workload"></div>
                     </div>
                     <div class="ad" id="ad2"><img src="static/images/test/ad2.png" alt="Anúncio 2"></div>
                     <div class="ad" id="ad3"><img src="static/images/test/ad3.png" alt="Anúncio 3"></div>
@@ -181,16 +221,19 @@
         const noticeTitleInput = document.getElementById('notice-title');
         const noticeDescriptionInput = document.getElementById('notice-description');
         const noticeRequirementsInput = document.getElementById('requirements');
+        const noticeWorkloadInput = document.getElementById('notice-workload');
 
         // Atualiza dinamicamente o conteúdo do slide lateral com base nos campos do formulário
         noticeTitleInput.addEventListener('input', updateAdContent);
         noticeDescriptionInput.addEventListener('input', updateAdContent);
         noticeRequirementsInput.addEventListener('input', updateAdContent);
+        noticeWorkloadInput.addEventListener('input', updateAdContent);
 
         function updateAdContent() {
             const adTitleElements = document.querySelectorAll('.ad-title');
             const adDescriptionElements = document.querySelectorAll('.ad-description');
             const adRequirementsElements = document.querySelectorAll('.ad-requirements');
+            const adWorkloadElements = document.querySelectorAll('.ad-workload');
 
             adTitleElements.forEach(adTitle => {
                 adTitle.textContent = noticeTitleInput.value;
@@ -202,6 +245,10 @@
 
             adRequirementsElements.forEach(adRequirements => {
                 adRequirements.textContent = noticeRequirementsInput.value;
+            });
+
+            adWorkloadElements.forEach(adWorkload => {
+                adWorkload.textContent = noticeWorkloadInput.value;
             });
         }
     </script>

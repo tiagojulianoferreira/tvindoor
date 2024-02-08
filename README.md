@@ -31,8 +31,9 @@ pip3 install -r requirements
 # Execução
 Execute o servidor gunicor na porta e número de workers escolhidos.
 ```shell
+cd /opt/tvindoor
+source .venv/bin/active
 gunicorn -w 8 --bind 0.0.0.0:5053 wsgi:app
-
 ```
 ## Features
     - Agenda de horários e salas consumindo API LibreBooking
