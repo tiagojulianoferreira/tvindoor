@@ -35,13 +35,15 @@
 
         <!-- Nova coluna com slider de anúncios -->
         <div id="ads-column">
-            <!-- <h2 class="schedule-heading">AVISOS</h2> -->
             <div id="ads-slider-container">
                 <div id="ads-slider">
                     <!-- Substitua os URLs das imagens pelos seus próprios anúncios -->
-                    <div class="ad"><img src="../static/images/ad1.png" alt="Anúncio 1"></div>
-                    <div class="ad"><img src="../static/images/ad2.png" alt="Anúncio 2"></div>
-                    <div class="ad"><img src="../static/images/ad3.png" alt="Anúncio 3"></div>
+                    <div class="ad" id="ad"><img src="../static/images/ad1.png" alt="Anúncio 1"></div>
+             
+                    <div class="ad" id="ad"><img src="../static/images/ad2.png" alt="Anúncio 2"></div>
+            
+                    <div class="ad" id="ad"><img src="../static/images/ad3.png" alt="Anúncio 3"></div>
+                    
                 </div>
             </div>
         </div>
@@ -71,6 +73,7 @@
 
     <script src="static/jquery-3.6.0.min.js"></script>
     <script>
+        // Função para atualizar o horário de reserva
         function updateSchedule() {
             $.getJSON('https://tv.tubarao.ifsc.edu.br/api/data', function(data) {
                 // Limpa o conteúdo da tabela
@@ -104,7 +107,6 @@
             fetch(backendURL)
                 .then(response => response.json())
                 .then(data => {
-                    // console.log("Dados recebidos do backend:", data); // Adiciona um log para verificar os dados recebidos
                     // Atualize os elementos HTML com os dados obtidos
                     document.getElementById('temperature').innerText = `${data.temperature}º`;
                     document.getElementById('weather-icon').className = `weather-icon wi ${data.forecast.icon}`;

@@ -15,36 +15,37 @@ body {
 .container {
     display: flex;
     flex-direction: row;
+    flex: 3;
     max-width: 100%;
-    margin: 10px;
+    margin: 8px;
     background-color: none;
     color: #333333;
     overflow: hidden;
 }
 
 #schedule-panel {
-    flex: 2;
+    flex: 3;
     overflow-y: auto;
-    margin: 10px;
+    margin: 7px;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .schedule-heading {
-    font-size: 22px;
+    font-size: 18px;
     text-align: center;
-    margin: 10px 0;
+    margin: 8px 0;
     color: #1d351d;
 }
 
 .schedule-table {
     width: 100%;
-    margin-top: 10px;
+    margin-top: 4px;
     border-collapse: collapse;
 }
 
 .schedule-table th, .schedule-table td {
-    padding: 12px;
+    padding: 6px;
     text-align: left;
     border-bottom: 1px solid #96A7C2;
 }
@@ -70,37 +71,40 @@ body {
     display: flex;
     flex-direction: column;
 }
-
 #ads-slider-container {
-    flex: 1;
     overflow: hidden;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /* height: calc(100vh - 200px); Ajuste conforme necessário para a altura do rodapé */
+    margin-bottom: 10px;
+    flex-grow: 1;
 }
 
 #ads-slider {
     display: flex;
     flex-direction: column;
-    transition: transform 1s ease-in-out;
+    transition: transform 5s ease-in-out;
     height: 100%;
 }
-
+#ad {
+    height: 100%;
+}
 .ad {
-    flex: 1;
+    height: 100%;
 }
 
 #ads-slider img {
     width: 100%;
     height: 100%;
-    /* object-fit: cover; */
+    object-fit: fill;
 }
 
 #footer {
     background-color: #394B5F;
     color: #FFFFFF;
     text-align: center;
-    padding: 2px;
-    margin-top: 10px;
+    padding: 0px;
+    margin-top: 0px;
     border-radius: 0px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: fixed;
@@ -116,6 +120,7 @@ body {
     height: auto;
     max-height: 80px;
     margin-bottom: 5px;
+    margin-top: auto;
 }
 
 #weather-container {
@@ -193,7 +198,7 @@ body {
     }
 
     .ad {
-        flex: none; /* Impede que os anúncios sejam redimensionados */
+        flex: auto; /* Impede que os anúncios sejam redimensionados */
         width: auto; /* Define a largura dos anúncios como automática */
         margin-right: 10px; /* Adiciona margem à direita para separação entre anúncios */
     }
