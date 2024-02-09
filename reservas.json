@@ -1,20 +1,20 @@
 [
   {
-    "Horário": "19:30 - 20:00",
-    "Local": "A04 - Lab. Práticas Pedagógicas e Atendimento",
+    "Horário": "10:00 - 11:30",
+    "Local": "B09 - Laboratório de Instalações Elétricas (07)",
+    "Responsável": "Ctic Tubarão",
+    "Título": "CST-ADS(NOVO) - 1ª - Matemática Aplicada TESTANDO"
+  },
+  {
+    "Horário": "10:00 - 10:30",
+    "Local": "B08 - Laboratório de Redes de Computadores (06)",
+    "Responsável": "Tiago Juliano Ferreira",
+    "Título": "TESTANDO 1"
+  },
+  {
+    "Horário": "10:30 - 11:00",
+    "Local": "B06 - Laboratório de Inovação Industrial",
     "Responsável": "Juan Carlos Nascimento",
-    "Título": "CST-ADS(NOVO) - 1ª - Organização e Arquitetura de Computadores - TESTE"
-  },
-  {
-    "Horário": "19:30 - 20:00",
-    "Local": "B08 - Laboratório de Redes de Computadores (06)",
-    "Responsável": "Tiago Juliano Ferreira",
-    "Título": "TESTANDO"
-  },
-  {
-    "Horário": "20:00 - 20:30",
-    "Local": "B08 - Laboratório de Redes de Computadores (06)",
-    "Responsável": "Tiago Juliano Ferreira",
-    "Título": "TESTANDO 2"
+    "Título": "CST-ADS(NOVO) - 2ª - Programação Orientada a Objetos - TESTE"
   }
 ]
