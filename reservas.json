@@ -6,15 +6,15 @@
     "Título": "CST-ADS(NOVO) - 1ª - Matemática Aplicada TESTANDO"
   },
   {
-    "Horário": "10:00 - 10:30",
-    "Local": "B08 - Laboratório de Redes de Computadores (06)",
-    "Responsável": "Tiago Juliano Ferreira",
-    "Título": "TESTANDO 1"
-  },
-  {
     "Horário": "10:30 - 11:00",
     "Local": "B06 - Laboratório de Inovação Industrial",
     "Responsável": "Juan Carlos Nascimento",
     "Título": "CST-ADS(NOVO) - 2ª - Programação Orientada a Objetos - TESTE"
+  },
+  {
+    "Horário": "11:00 - 11:30",
+    "Local": "B08 - Laboratório de Redes de Computadores (06)",
+    "Responsável": "Tiago Juliano Ferreira",
+    "Título": "TESTANDO 3"
   }
 ]

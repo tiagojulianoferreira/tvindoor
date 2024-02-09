@@ -16,7 +16,7 @@ body {
     display: flex;
     flex-direction: row;
     max-width: 100%;
-    margin: 20px;
+    margin: 10px;
     background-color: none;
     color: #333333;
     overflow: hidden;
@@ -25,15 +25,15 @@ body {
 #schedule-panel {
     flex: 2;
     overflow-y: auto;
-    margin: 20px;
+    margin: 10px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .schedule-heading {
-    font-size: 28px;
+    font-size: 22px;
     text-align: center;
-    margin: 20px 0;
+    margin: 10px 0;
     color: #1d351d;
 }
 
@@ -44,7 +44,7 @@ body {
 }
 
 .schedule-table th, .schedule-table td {
-    padding: 15px;
+    padding: 12px;
     text-align: left;
     border-bottom: 1px solid #96A7C2;
 }
@@ -64,7 +64,7 @@ body {
 #ads-column {
     flex: 1;
     overflow: hidden;
-    margin: 20px;
+    margin: 5px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -99,8 +99,8 @@ body {
     background-color: #394B5F;
     color: #FFFFFF;
     text-align: center;
-    padding: 5px;
-    margin-top: 15px;
+    padding: 2px;
+    margin-top: 10px;
     border-radius: 0px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     position: fixed;
@@ -114,8 +114,8 @@ body {
 #footer img {
     max-width: 100%;
     height: auto;
-    max-height: 100px;
-    margin-bottom: 10px;
+    max-height: 80px;
+    margin-bottom: 5px;
 }
 
 #weather-container {
