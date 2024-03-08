@@ -5,11 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administração de Avisos</title>
     <link rel="stylesheet" href="../static/css/weather-icons.min.css">
-    <link rel="stylesheet" href="../static/styles.css">
+    <link rel="stylesheet" href="dev/styles.css">
     <style>
         /* Adiciona estilos específicos para o formulário */
         #notice-form {
             padding: 20px;
+            width: 50%; /* Definir a largura do formulário */
+            float: left; /* Flutuar à esquerda */
+        }
+        #ads-column {
+            padding: 20px;
+            width: 50%; /* Definir a largura da coluna de anúncios */
+            float: left; /* Flutuar à direita */
         }
         .form-group {
             margin-bottom: 20px;
@@ -51,55 +58,41 @@
         .checkbox-group input[type="checkbox"] {
             margin-right: 5px;
         }
-        /* Exibe o campo Empresa e Requisitos por padrão */
-        #company-field,
-        #requirements-field {
-            display: block;
-            margin-top: 10px; /* Ajusta a margem superior dos campos */
-        }
         /* Estilo para a descrição */
         #notice-description {
             margin-right: 50px; /* Margem direita de pelo menos 50px */
         }
-        /* Estilos para os requisitos */
-        #requirements {
-            width: calc(100% - 22px); /* Ajusta o tamanho do campo para levar em conta o padding */
-            padding: 10px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
-            margin-top: 5px; /* Ajusta a margem superior */
-            
-            margin-bottom: 20px; /* Margem inferior para separação */
-        }
-
         /* Estilos para o slider */
-        #ads-column {
-            padding: 20px;
-        }
-
         #ads-slider-container {
             position: relative;
             overflow: hidden;
         }
-
-        #ads-slider {
+        /* #ads-slider {
             display: flex;
             transition: transform 0.5s ease;
-        }
-
+        } */
         .ad {
             width: 100%;
             flex: 0 0 auto;
             margin-right: 20px; /* Espaçamento entre os slides */
+            position: relative;
         }
-
-        .ad img {
+        .ad-box {
+            width: 100%;
+            height: 100%; /* Altura do container */
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: rgba(64, 207, 64, 0.8); /* Cor de fundo com transparência */
+            border: 1px solid #ccc; /* Borda */
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Efeito de sombra */
+            z-index: -1; /* Colocar atrás do conteúdo */
+        }
+        /* .ad img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-
+        } */
         .ad .ad-title,
         .ad .ad-description,
         .ad .ad-requirements,
@@ -109,33 +102,41 @@
             left: 62px;
             max-width: 80%;
             right: 20px;
-            color: #080522;
+            color: #05301b;
             font-size: 30px;
-            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: left;
+            text-justify: inherit;
             opacity: 0.8;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
             margin: 0 auto; /* Centraliza horizontalmente */
             width: calc(100% - 40px); /* Define a largura */
             padding: 20px;
+            border: #05301b 1px;
         }
-
         .ad .ad-description {
             top: 100px; /* Ajusta a posição da descrição */
-            font-size: 20px;
+            font-size: 16px;
         }
-
         .ad .ad-requirements {
-            top: 240px; /* Ajusta a posição dos requisitos */
+            top: 350px; /* Ajusta a posição dos requisitos */
             font-size: 16px;
         }
-
         .ad .ad-workload {
-            top: 30px; /* Ajusta a posição da carga horária */
+            top: 500px; /* Ajusta a posição da carga horária */
             font-size: 16px;
+        }
+        /* Estilos para o label "Descrição" */
+        .description-label {
+            font-weight: bold;
+        }
+        /* Limpar flutuações */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
         }
     </style>
 </head>
-
 <body>
     <div class="container">
         <div id="schedule-panel">
@@ -147,16 +148,13 @@
                     <label><input type="checkbox" name="notice-type" value="bolsas"> Bolsas</label>
                     <label><input type="checkbox" name="notice-type" value="editais"> Editais</label>
                 </div>
-                <div class="form-group" id="company-field">
-                    <label for="company">Instituição:</label>
-                    <input type="text" id="company" name="company">
-                </div>
+                
                 <div class="form-group">
                     <label for="notice-title">Título:</label>
                     <input type="text" id="notice-title" name="notice-title" required>
                 </div>
                 <div class="form-group">
-                    <label for="notice-description">Descrição:</label>
+                    <label for="notice-description" class="description-label">Descrição:</label>
                     <textarea id="notice-description" name="notice-description" rows="4" required></textarea>
                 </div>
                 <div class="form-group" id="requirements-field">
@@ -167,11 +165,16 @@
                     <label for="notice-workload">Carga Horária:</label>
                     <input type="text" id="notice-workload" name="notice-workload">
                 </div>
+                <div class="form-group" id="company-field">
+                    <label for="company">Instituição:</label>
+                    <input type="text" id="company" name="company">
+                </div>
                 <div class="form-group">
                     <label for="notice-link">Link:</label>
                     <input type="url" id="notice-link" name="notice-link">
                 </div>
-                <button type="submit">Enviar</button>
+                <!-- Alteração do tipo do botão para "button" -->
+                <button type="button" id="submit-button">Enviar</button>
             </div>
         </div>
 
@@ -181,42 +184,28 @@
                 <div id="ads-slider">
                     <!-- Substitua os URLs das imagens pelos seus próprios anúncios -->
                     <div class="ad" id="ad1">
-                        <img src="static/images/test/ad1.png" alt="Anúncio 1">
+                        <div class="ad-box"></div>
                         <div class="ad-title"></div>
                         <div class="ad-description"></div>
                         <div class="ad-requirements"></div>
                         <div class="ad-workload"></div>
+                        <div class="ad-workload"></div>
                     </div>
-                    <div class="ad" id="ad2"><img src="static/images/test/ad2.png" alt="Anúncio 2"></div>
-                    <div class="ad" id="ad3"><img src="static/images/test/ad3.png" alt="Anúncio 3"></div>
+                    <!-- <div class="ad" id="ad2"><img src="static/images/test/ad2.png" alt="Anúncio 2"></div>
+                    <div class="ad" id="ad3"><img src="static/images/test/ad3.png" alt="Anúncio 3"></div> -->
                 </div>
             </div>
         </div>
     </div>
-
+    <!-- Limpeza de flutuação -->
+    <div class="clearfix"></div>
     <!-- Rodapé -->
     <div id="footer">
         <!-- Logotipo -->
         <img src="static/images/seu-logotipo.png" alt="Logotipo">
-
-        <!-- Texto do rodapé -->
-        <p>Desenvolvido pela CTIC Campus Tubarão</p>
-
-        <!-- Previsão do Tempo e Hora Certa -->
-        <div id="weather-container">
-            <span class="time-weather">
-                <a class="weather widget">
-                    <span class="weather-info">
-                        <span class="temp" id="temperature"></span>
-                    </span>
-                    <i class="weather-icon" id="weather-icon"></i>
-                </a>
-            </span>
-            <span class="time" id="current-time"></span> 
-        </div>
     </div>
 
-    <script src="static/jquery-3.6.0.min.js"></script>
+    <!-- <script src="static/jquery-3.6.0.min.js"></script> -->
     <script>
         const noticeTitleInput = document.getElementById('notice-title');
         const noticeDescriptionInput = document.getElementById('notice-description');
@@ -251,6 +240,16 @@
                 adWorkload.textContent = noticeWorkloadInput.value;
             });
         }
+        // Manipulador de eventos para enviar o formulário
+        const submitButton = document.getElementById('submit-button');
+        submitButton.addEventListener('click', function(event) {
+            // Previne o comportamento padrão do botão de envio
+            event.preventDefault();
+
+            // Aqui você pode adicionar o código para enviar os dados do formulário
+            // Por exemplo, você pode usar AJAX para enviar os dados sem recarregar a página
+            alert('Formulário enviado!');
+        });
     </script>
 </body>
 </html>
